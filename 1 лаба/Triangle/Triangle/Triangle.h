@@ -4,11 +4,11 @@
 class CTriangle
 {
 public:
-	CTriangle(unsigned a, unsigned b, unsigned c);
+	CTriangle(float a, float b, float c);
 	std::string getType();
 	~CTriangle();
 private:
-	unsigned a, b, c;
+	float a, b, c;
 	const enum TYPE { NOTEXIST, SIMPLE, ISOSCELES, EQUILATERAL};
 	TYPE type = NOTEXIST;
 	void determineTheType();

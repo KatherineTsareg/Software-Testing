@@ -2,7 +2,7 @@
 #include "Triangle.h"
 
 
-CTriangle::CTriangle(unsigned a, unsigned b, unsigned c)
+CTriangle::CTriangle(float a, float b, float c)
 	:a(a)
 	,b(b)
 	,c(c)

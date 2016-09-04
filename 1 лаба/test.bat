@@ -6,6 +6,12 @@ IF ERRORLEVEL 1 GOTO testFailed
 fc /b simple_345.txt reference/simple.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
+echo Test input data is not a numeric
+triangle.exe a b 5  > notNumeric.txt
+IF ERRORLEVEL 1 GOTO testFailed
+fc /b notNumeric.txt reference/invalidArguments.txt
+IF ERRORLEVEL 1 GOTO testFailed
+
 echo Test empty input data
 triangle.exe > invalid_input_data.txt
 IF ERRORLEVEL 1 GOTO testFailed
@@ -24,16 +30,16 @@ IF ERRORLEVEL 1 GOTO testFailed
 fc /b overkill_input_data.txt reference/invalidArguments.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
+echo Test side is negative
+triangle.exe 3 4 -5 > negativeSide.txt
+IF ERRORLEVEL 1 GOTO testFailed
+fc /b negativeSide.txt reference/invalidArguments.txt
+IF ERRORLEVEL 1 GOTO testFailed
+
 echo Test side equal zero
 triangle.exe 3 0 5 > side0.txt
 IF ERRORLEVEL 1 GOTO testFailed
 fc /b side0.txt reference/notExist.txt
-IF ERRORLEVEL 1 GOTO testFailed
-
-echo Test side is negative
-triangle.exe 3 4 -5 > negativeSide.txt
-IF ERRORLEVEL 1 GOTO testFailed
-fc /b negativeSide.txt reference/notExist.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo Test triangle is simple
@@ -55,9 +61,9 @@ fc /b equilateralTriangle.txt reference/equilateral.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo Test triangle is equilateral with float input data
-triangle.exe 5.23 5.23 5.23  > equilateralTriangleFloat.txt
+triangle.exe 5.1 5.5 5.9 > triangleFloat.txt
 IF ERRORLEVEL 1 GOTO testFailed
-fc /b equilateralTriangleFloat.txt reference/equilateral.txt
+fc /b triangleFloat.txt reference/simple.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo OK

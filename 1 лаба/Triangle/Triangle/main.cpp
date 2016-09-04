@@ -3,17 +3,41 @@
 
 #include "stdafx.h"
 #include "Triangle.h"
+#include <vector>
+#include <algorithm>
+#include <boost/algorithm/string.hpp>
 
-unsigned getSideLength(const char * numb)
+using namespace std;
+
+bool isUint(char * numb)
 {
-	float side = atof (numb);
-	return (side > 0 ? side : 0);
+	stringstream ss;
+	ss << numb;
+	string numbString;
+	ss >> numbString;
+	boost::replace_all(numbString, ".", ",");
+	if (all_of(numbString.begin(), numbString.end(), [](auto x){
+		return ((int(x) > 47) && (int(x) < 58) || (int(x) == 44)); }))
+	{
+		return true;
+	}
+	return false;
+}
+
+float getSideLength(char * numb)
+{
+	stringstream ss;
+	ss << numb;
+	string numbString;
+	ss >> numbString;
+	boost::replace_all(numbString, ".", ",");
+	return stof(numbString);
 }
 
 int main(int argc, char * argv[])
 {
 	setlocale(LC_ALL, "Russian");
-	if (argc == 4)
+	if (argc == 4 && isUint(argv[1]) && isUint(argv[2]) && isUint(argv[3]))
 	{
 		CTriangle triangle(getSideLength(argv[1]), getSideLength(argv[2]), getSideLength(argv[3]));
 		std::cout << triangle.getType();
