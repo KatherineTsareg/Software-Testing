@@ -7,9 +7,13 @@ fc /b simple_345.txt reference/simple.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo Test input data is not a numeric
-triangle.exe a b 5  > notNumeric.txt
+triangle.exe 1 . 5  > notNumeric1.txt
 IF ERRORLEVEL 1 GOTO testFailed
-fc /b notNumeric.txt reference/invalidArguments.txt
+fc /b notNumeric1.txt reference/invalidArguments.txt
+IF ERRORLEVEL 1 GOTO testFailed
+triangle.exe a 4 c  > notNumeric2.txt
+IF ERRORLEVEL 1 GOTO testFailed
+fc /b notNumeric2.txt reference/invalidArguments.txt
 IF ERRORLEVEL 1 GOTO testFailed
 
 echo Test empty input data

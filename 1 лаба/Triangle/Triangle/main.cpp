@@ -16,8 +16,8 @@ bool isUint(char * numb)
 	string numbString;
 	ss >> numbString;
 	boost::replace_all(numbString, ".", ",");
-	if (all_of(numbString.begin(), numbString.end(), [](auto x){
-		return ((int(x) > 47) && (int(x) < 58) || (int(x) == 44)); }))
+	if (all_of(numbString.begin(), numbString.end(), [&](auto x){
+		return ((int(x) > 47) && (int(x) < 58) || (int(x) == 44) && (numbString.length() > 1)); }))
 	{
 		return true;
 	}
